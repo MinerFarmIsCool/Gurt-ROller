@@ -25,10 +25,16 @@ void loop() {
 
   pressedButton = buttonCheck();
   if (pressedButton == 0) {
+    lcd.clear();
+    for (int i = 0; i < 5; i++) {
+      int randNumRolling = random(0, 20);
+      lcd.print(randNumRolling);
+      delay(100);
+      lcd.clear();
+    }
     int randNum = random(0, 20);
     lcd.print(randNum);
-    delay(500);
-    lcd.clear();
+    
   }
 
   //lcd.setCursor(0, 1);              //move the cursor to the first space of the bottom row
