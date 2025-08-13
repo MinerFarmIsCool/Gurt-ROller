@@ -2,13 +2,17 @@
 
 LiquidCrystal lcd(13, 12, 11, 10, 9, 8);   // tell the RedBoard what pins are connected to the display
 
-int button[] = {2}; // button[0] is red
+int button[] = {2, 3, 4, 5}; // button[0] is red, 
 int pressedButton = 4;
 
 
 void setup() {
 
   pinMode(button[0], INPUT_PULLUP);
+  pinMode(button[1], INPUT_PULLUP);
+  pinMode(button[2], INPUT_PULLUP);
+  pinMode(button[3], INPUT_PULLUP);
+
 
   lcd.begin(16, 2);                 //tell the lcd library that we are using a display that is 16 characters wide and 2 characters high
   lcd.clear();                      //clear the display
@@ -25,17 +29,74 @@ void loop() {
 
   pressedButton = buttonCheck();
   if (pressedButton == 0) {
+    int dieMaxRoll = 21;
     lcd.clear();
     for (int i = 0; i < 5; i++) {
-      int randNumRolling = random(0, 20);
+      int randNumRolling = random(1, dieMaxRoll);
       lcd.print(randNumRolling);
       delay(100);
       lcd.clear();
     }
-    int randNum = random(0, 20);
+    int randNum = random(1, dieMaxRoll);
     lcd.print(randNum);
-    
-  }
+    if (randNum == (dieMaxRoll-1)) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    }
+
+  }  else if (pressedButton == 1) {
+    int dieMaxRoll = 11;
+    lcd.clear();
+    for (int i = 0; i < 5; i++) {
+      int randNumRolling = random(1, dieMaxRoll);
+      lcd.print(randNumRolling);
+      delay(100);
+      lcd.clear();
+    }
+    int randNum = random(1, dieMaxRoll);
+    lcd.print(randNum);
+    if (randNum == (dieMaxRoll-1)) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    }
+
+  } else if (pressedButton == 2) {
+    int dieMaxRoll = 7;
+    lcd.clear();
+    for (int i = 0; i < 5; i++) {
+      int randNumRolling = random(1, dieMaxRoll);
+      lcd.print(randNumRolling);
+      delay(100);
+      lcd.clear();
+    }
+    int randNum = random(1, dieMaxRoll);
+    lcd.print(randNum);
+    if (randNum == (dieMaxRoll-1)) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    }
+
+  }   else if (pressedButton == 3) {
+    int dieMaxRoll = 5;
+    lcd.clear();
+    for (int i = 0; i < 5; i++) {
+      int randNumRolling = random(1, dieMaxRoll);
+      lcd.print(randNumRolling);
+      delay(100);
+      lcd.clear();
+    }
+    int randNum = random(1, dieMaxRoll);
+    lcd.print(randNum);
+    if (randNum == (dieMaxRoll-1)) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    }
+
+  } 
 
   //lcd.setCursor(0, 1);              //move the cursor to the first space of the bottom row
   //lcd.print(millis() / 1000);       //print the number of seconds that have passed since the last reset
@@ -45,13 +106,13 @@ int buttonCheck() {
   //check if any buttons are being pressed
   if (digitalRead(button[0]) == LOW) {
     return 0;
-  } //else if (digitalRead(button[1]) == LOW) {
-    //return 1;
-  //} //else if (digitalRead(button[2]) == LOW) {
-    //return 2;
-  //} //else if (digitalRead(button[3]) == LOW) {
-    //return 3;
-  //}
+  } else if (digitalRead(button[1]) == LOW) {
+    return 1;
+  } else if (digitalRead(button[2]) == LOW) {
+    return 2;
+  } else if (digitalRead(button[3]) == LOW) {
+    return 3;
+  }
    else {
     return 4; //this will be the value for no button being pressed
   }
