@@ -11,7 +11,6 @@ void setup() {
   pinMode(button[0], INPUT_PULLUP);
   pinMode(button[1], INPUT_PULLUP);
   pinMode(button[2], INPUT_PULLUP);
-  pinMode(button[3], INPUT_PULLUP);
 
 
   lcd.begin(16, 2);                 //tell the lcd library that we are using a display that is 16 characters wide and 2 characters high
@@ -31,51 +30,48 @@ void loop() {
   if (pressedButton == 0) { //d20
     int dieMaxRoll = 21;
     lcd.clear();
-    for (int i = 0; i < 5; i++) {
-      int randNumRolling = random(1, dieMaxRoll);
-      lcd.print(randNumRolling);
-      delay(100);
-      lcd.clear();
-    }
+    int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
     lcd.print(randNum);
     if (randNum == (dieMaxRoll-1)) {
       lcd.setCursor(0, 1);
       lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    } else if (randNum == 1) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Failure!");
       lcd.setCursor(0, 0);
     }
 
   }  else if (pressedButton == 1) { //d10
     int dieMaxRoll = 11;
     lcd.clear();
-    for (int i = 0; i < 5; i++) {
-      int randNumRolling = random(1, dieMaxRoll);
-      lcd.print(randNumRolling);
-      delay(100);
-      lcd.clear();
-    }
+    int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
     lcd.print(randNum);
     if (randNum == (dieMaxRoll-1)) {
       lcd.setCursor(0, 1);
       lcd.print("Critical Success!");
       lcd.setCursor(0, 0);
+    } else if (randNum == 1) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Failure!");
+      lcd.setCursor(0, 0);
     }
 
   } else if (pressedButton == 2) { //d6
     int dieMaxRoll = 7;
     lcd.clear();
-    for (int i = 0; i < 5; i++) {
-      int randNumRolling = random(1, dieMaxRoll);
-      lcd.print(randNumRolling);
-      delay(100);
-      lcd.clear();
-    }
+    int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
     lcd.print(randNum);
     if (randNum == (dieMaxRoll-1)) {
       lcd.setCursor(0, 1);
       lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    } else if (randNum == 1) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Failure!");
       lcd.setCursor(0, 0);
     }
 
@@ -99,4 +95,32 @@ int buttonCheck() {
    else {
     return 4; //this will be the value for no button being pressed
   }
+}
+
+
+int generateNumbersAnimation(int dieMaxRoll) {
+  for (int i = 0; i < 35; i++) {
+    int randNumRolling = random(1, dieMaxRoll);
+    // long animationRandomNum = random(10000000, 99999999);
+    // long animationRandomNum2 = random(10000000, 99999999);
+
+    generateLettersAnimation();
+
+    lcd.setCursor(0, 0);
+    lcd.print(randNumRolling);
+
+    int delayTime = 10 * (i / 3);
+    delay(delayTime);
+    lcd.clear();
+  }
+  return 0;
+}
+
+int generateLettersAnimation() {
+    for (int i = 0; i < 16; i++) {
+    char randomUpperChar = 'A' + (rand() % 26);
+    lcd.setCursor(i, 1);
+    lcd.print(randomUpperChar);
+  }
+  return 0;
 }
