@@ -67,13 +67,11 @@ int buttonCheck() {
 int generateNumbersAnimation(int dieMaxRoll) {
   for (int i = 0; i < 35; i++) {
     int randNumRolling = random(1, dieMaxRoll);
+    int delayTime = 10 * (i / 3);
 
     generateLettersAnimation();
-
-    lcd.setCursor(0, 0);
+    lcd.setCursor(7, 0);
     lcd.print(randNumRolling);
-
-    int delayTime = 10 * (i / 3);
     delay(delayTime);
     lcd.clear();
   }
@@ -90,8 +88,25 @@ int generateLettersAnimation() {
 }
 
 void printTheNum(int randNum, int dieMaxRoll) {
-  lcd.print(randNum);
-  delay(1000);
+  for (int i = 35; i < 40; i++) { // Have the letter rolling roll for an extra few moments
+    generateLettersAnimation();
+    int delayTime = 10 * (i / 3);
+    delay(delayTime);
+    lcd.clear();
+    lcd.setCursor(6, 0);
+    char upSlash[] = "|";
+    lcd.print(upSlash);
+    lcd.setCursor(7, 0);
+    lcd.print(randNum);
+    if (randNum >= 10) {
+      lcd.setCursor(9, 0);
+      lcd.print(upSlash);
+    } else {
+      lcd.setCursor(8, 0);
+      lcd.print(upSlash);
+    }
+
+  }
     if (randNum == (dieMaxRoll-1)) {
       lcd.setCursor(0, 1);
       lcd.print("Critical Success!");
