@@ -32,49 +32,21 @@ void loop() {
     lcd.clear();
     int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
-    lcd.print(randNum);
-    if (randNum == (dieMaxRoll-1)) {
-      lcd.setCursor(0, 1);
-      lcd.print("Critical Success!");
-      lcd.setCursor(0, 0);
-    } else if (randNum == 1) {
-      lcd.setCursor(0, 1);
-      lcd.print("Critical Failure!");
-      lcd.setCursor(0, 0);
-    }
-
-  }  else if (pressedButton == 1) { //d10
+    printTheNum(randNum, dieMaxRoll);
+  }
+    else if (pressedButton == 1) { //d10
     int dieMaxRoll = 11;
     lcd.clear();
     int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
-    lcd.print(randNum);
-    if (randNum == (dieMaxRoll-1)) {
-      lcd.setCursor(0, 1);
-      lcd.print("Critical Success!");
-      lcd.setCursor(0, 0);
-    } else if (randNum == 1) {
-      lcd.setCursor(0, 1);
-      lcd.print("Critical Failure!");
-      lcd.setCursor(0, 0);
-    }
-
-  } else if (pressedButton == 2) { //d6
+    printTheNum(randNum, dieMaxRoll);
+  }
+   else if (pressedButton == 2) { //d6
     int dieMaxRoll = 7;
     lcd.clear();
     int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
-    lcd.print(randNum);
-    if (randNum == (dieMaxRoll-1)) {
-      lcd.setCursor(0, 1);
-      lcd.print("Critical Success!");
-      lcd.setCursor(0, 0);
-    } else if (randNum == 1) {
-      lcd.setCursor(0, 1);
-      lcd.print("Critical Failure!");
-      lcd.setCursor(0, 0);
-    }
-
+    printTheNum(randNum, dieMaxRoll);
   }
 
   //lcd.setCursor(0, 1);              //move the cursor to the first space of the bottom row
@@ -89,11 +61,8 @@ int buttonCheck() {
     return 1;
   } else if (digitalRead(button[2]) == LOW) {
     return 2;
-  } //else if (digitalRead(button[3]) == LOW) {
-    //return 3;
-  //}
-   else {
-    return 4; //this will be the value for no button being pressed
+  } else {
+    return 4;
   }
 }
 
@@ -101,8 +70,6 @@ int buttonCheck() {
 int generateNumbersAnimation(int dieMaxRoll) {
   for (int i = 0; i < 35; i++) {
     int randNumRolling = random(1, dieMaxRoll);
-    // long animationRandomNum = random(10000000, 99999999);
-    // long animationRandomNum2 = random(10000000, 99999999);
 
     generateLettersAnimation();
 
@@ -117,10 +84,23 @@ int generateNumbersAnimation(int dieMaxRoll) {
 }
 
 int generateLettersAnimation() {
-    for (int i = 0; i < 16; i++) {
+  for (int i = 0; i < 16; i++) {
     char randomUpperChar = 'A' + (rand() % 26);
     lcd.setCursor(i, 1);
     lcd.print(randomUpperChar);
   }
   return 0;
+}
+
+void printTheNum(int randNum, int dieMaxRoll) {
+  lcd.print(randNum);
+    if (randNum == (dieMaxRoll-1)) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Success!");
+      lcd.setCursor(0, 0);
+    } else if (randNum == 1) {
+      lcd.setCursor(0, 1);
+      lcd.print("Critical Failure!");
+      lcd.setCursor(0, 0);
+    }
 }
