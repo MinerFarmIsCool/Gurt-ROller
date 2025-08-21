@@ -42,15 +42,12 @@ void loop() {
     printTheNum(randNum, dieMaxRoll);
   }
    else if (pressedButton == 2) { //d6
-    int dieMaxRoll = 7;
+    int dieMaxRoll = 3; // Remember to set to 7
     lcd.clear();
     int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
     printTheNum(randNum, dieMaxRoll);
   }
-
-  //lcd.setCursor(0, 1);              //move the cursor to the first space of the bottom row
-  //lcd.print(millis() / 1000);       //print the number of seconds that have passed since the last reset
 }
 
 int buttonCheck() {
@@ -94,6 +91,7 @@ int generateLettersAnimation() {
 
 void printTheNum(int randNum, int dieMaxRoll) {
   lcd.print(randNum);
+  delay(1000);
     if (randNum == (dieMaxRoll-1)) {
       lcd.setCursor(0, 1);
       lcd.print("Critical Success!");
