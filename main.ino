@@ -42,7 +42,7 @@ void loop() {
     printTheNum(randNum, dieMaxRoll);
   }
    else if (pressedButton == 2) { //d6
-    int dieMaxRoll = 3; // Remember to set to 7
+    int dieMaxRoll = 7; // Remember to set to 7
     lcd.clear();
     int daskfak = generateNumbersAnimation(dieMaxRoll);
     int randNum = random(1, dieMaxRoll);
