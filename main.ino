@@ -25,7 +25,11 @@ void loop() {
   //lcd.print(randNum);
   //delay(500);
   //lcd.clear();
-
+  lcd.setCursor(6, 0);
+    char upSlash[] = "|";
+    lcd.print(upSlash);
+  lcd.setCursor(9, 0);
+    lcd.print(upSlash);
   pressedButton = buttonCheck();
   if (pressedButton == 0) { //d20
     int dieMaxRoll = 21;
@@ -70,8 +74,22 @@ int generateNumbersAnimation(int dieMaxRoll) {
     int delayTime = 10 * (i / 3);
 
     generateLettersAnimation();
-    lcd.setCursor(7, 0);
-    lcd.print(randNumRolling);
+     if (randNumRolling <10) {
+      lcd.setCursor(8, 0);
+      lcd.print(randNumRolling);
+      lcd.setCursor(7, 0);
+      lcd.print(0);
+  } else {
+      lcd.setCursor(7, 0);
+      lcd.print(randNumRolling);
+  }
+
+    
+    char upSlash[] = "|";
+     lcd.setCursor(9, 0);
+    lcd.print(upSlash);
+    lcd.setCursor(6, 0);
+    lcd.print(upSlash);
     delay(delayTime);
     lcd.clear();
   }
@@ -96,13 +114,19 @@ void printTheNum(int randNum, int dieMaxRoll) {
     lcd.setCursor(6, 0);
     char upSlash[] = "|";
     lcd.print(upSlash);
-    lcd.setCursor(7, 0);
-    lcd.print(randNum);
-    if (randNum >= 10) {
+    lcd.setCursor(9, 0);
+    lcd.print(upSlash);
+  if (randNum <10) {
+      lcd.setCursor(8, 0);
+      lcd.print(randNum);
+      lcd.setCursor(7, 0);
+      lcd.print(0);
+  } else {
+      lcd.setCursor(7, 0);
+      lcd.print(randNum);
       lcd.setCursor(9, 0);
       lcd.print(upSlash);
-    } else {
-      lcd.setCursor(8, 0);
+      lcd.setCursor(9, 0);
       lcd.print(upSlash);
     }
 
